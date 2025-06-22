@@ -1,16 +1,6 @@
-
 # 🧪 Custom API Server with MongoDB and Node.js
 
-This project is a custom API server built using **Node.js**, **Express**, and **MongoDB**. It supports full CRUD operations on a `User` model and can be extended easily for more features. Optional frontend and API documentation can be added as needed.
-
----
-
-## 📌 Features
-
-- RESTful API endpoints
-- CRUD operations: Create, Read, Update, Delete
-- MongoDB integration via Mongoose
-- Easily testable using Thunder Client, Postman, or curl
+This project is a custom API server built using **Node.js**, **Express**, and **MongoDB**. It supports full CRUD operations on a `User` model and includes automated tests with code coverage reporting.
 
 ---
 
@@ -18,102 +8,38 @@ This project is a custom API server built using **Node.js**, **Express**, and **
 
 - **Node.js**
 - **Express.js**
-- **MongoDB**
-- **Mongoose**
+- **MongoDB** (with Mongoose)
 - **VS Code** (development)
-- **Thunder Client / Postman** (testing)
-
----
-
-## 🗃️ Database
-
-- **MongoDB Community Edition** is used locally.
-- Mongoose is used to define schema and interact with the database.
-
-### ✅ Database Integration
-
-Connection is established in `index.js`:
-```js
-mongoose.connect('mongodb://127.0.0.1:27017/myapidb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-<<<<<<< HEAD
-````
-
----
-
-## 🚀 How to Run the Server Locally
-
-### 🧩 Prerequisites
-
-* Node.js and npm installed
-* MongoDB installed and running (`mongod`)
-* VS Code (or any code editor)
-
-### 📥 Installation Steps
-
-```bash
-git clone <your-repo-url>
-cd my-api-server
-npm install
-```
-
-### ▶️ Start MongoDB (in separate terminal)
-
-```bash
-mongod
-```
-
-### ▶️ Run the server
-
-```bash
-node index.js
-```
-
-You should see:
-
-```
-MongoDB Connected
-Server running at http://localhost:3000
-```
+- **Thunder Client / Postman** (API testing)
+- **Jest** + **Supertest** (unit/integration/API testing)
 
 ---
 
 ## 📡 API Endpoints
 
-### 🔹 1. Create User
-
-* **Method:** `POST`
-* **URL:** `/api/users`
-* **Body:**
-
-```json
-{
-  "name": "Aditya",
-  "email": "aditya@example.com",
-  "age": 22
-}
-```
-
-* **Response:**
-
-```json
-{
-  "_id": "609d...",
-  "name": "Aditya",
-  "email": "aditya@example.com",
-  "age": 22
-}
-```
+| Method | Endpoint         | Description             |
+|--------|------------------|-------------------------|
+| GET    | `/api/users`     | Get all users           |
+| POST   | `/api/users`     | Add a new user          |
+| PUT    | `/api/users/:id` | Update an existing user |
+| DELETE | `/api/users/:id` | Delete a user           |
 
 ---
 
-### 🔹 2. Get All Users
+### 📤 Sample Request
 
-* **Method:** `GET`
-* **URL:** `/api/users`
-* **Response:**
+**POST /api/users**
+```json
+{
+  "name": "Aditya",
+  "email": "aditya@example.com",
+  "age": 22
+}
+````
+
+### 📥 Sample Response
+
+**GET /api/users**
 
 ```json
 [
@@ -128,58 +54,90 @@ Server running at http://localhost:3000
 
 ---
 
-### 🔹 3. Update User
+## 🗃️ Database
 
-* **Method:** `PUT`
-* **URL:** `/api/users/:id`
-* **Body:**
+* **MongoDB Community Edition** used locally
+* Connected using Mongoose
 
-```json
-{
-  "name": "Updated Name",
-  "age": 25
-}
-```
+### ✅ Integration Code (in `server.js`):
 
-* **Response:**
-
-```json
-{
-  "_id": "609d...",
-  "name": "Updated Name",
-  "email": "aditya@example.com",
-  "age": 25
-}
+```js
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/myapidb', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 ```
 
 ---
 
-### 🔹 4. Delete User
+## 🚀 How to Run the Application
 
-* **Method:** `DELETE`
-* **URL:** `/api/users/:id`
-* **Response:**
+### 🧩 Prerequisites
 
-```json
-{
-  "message": "User deleted"
-}
+* Node.js & npm
+* MongoDB installed and running (`mongod`)
+* VS Code or any code editor
+
+### 📥 Installation
+
+```bash
+git clone https://github.com/AdityaPrakash-03/my-api-server.git
+cd my-api-server
+npm install
 ```
+
+### ▶️ Start MongoDB
+
+```bash
+mongod
+```
+
+### ▶️ Run the Server
+
+```bash
+npm start
+```
+
+The server will run at: `http://localhost:3000`
 
 ---
 
 ## 🧪 How to Test the API
 
-### ✅ Option 1: Thunder Client (VS Code)
+### ✅ Option 1: Thunder Client (VS Code Extension)
 
-1. Install **Thunder Client** extension
-2. Use the above endpoints and test with JSON bodies
+1. Install **Thunder Client**
+2. Hit endpoints (GET, POST, PUT, DELETE) using JSON bodies
 
 ### ✅ Option 2: curl (Command Line)
 
 ```bash
-curl -X POST http://localhost:3000/api/users -H "Content-Type: application/json" -d "{\"name\":\"Aditya\",\"email\":\"aditya@example.com\",\"age\":22}"
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d "{\"name\":\"Aditya\",\"email\":\"aditya@example.com\",\"age\":22}"
 ```
+
+---
+
+## 🧪 How to Run Tests
+
+### 🧰 Testing Tools Used
+
+* **Jest**: Test runner & assertion library
+* **Supertest**: HTTP assertions for Express routes
+* **mongodb-memory-server**: In-memory MongoDB instance for integration tests
+
+### 🔧 Run Tests + View Coverage
+
+```bash
+npm test
+```
+
+This will generate a coverage report and display it in the terminal.
+
+### 📸 Test Coverage Screenshot
+
+![Test Coverage Screenshot](assests/ss.png)
 
 ---
 
@@ -187,25 +145,39 @@ curl -X POST http://localhost:3000/api/users -H "Content-Type: application/json"
 
 ```
 my-api-server/
+│
 ├── models/
-│   └── User.js         # Mongoose schema
-├── index.js            # Server entry point
+│   └── User.js
+├── __tests__/
+│   ├── user.unit.test.js
+│   ├── user.integration.test.js
+│   └── user.api.test.js
+├── app.js
+├── server.js
+├── .env
 ├── package.json
-└── README.md           # This file
+├── README.md
+└── coverage/
 ```
 
 ---
 
 ## 📌 Future Improvements
 
-* Add validation and error handling
-* Build a simple frontend using HTML + JS
-* Deploy to Render or Railway
-* Add Swagger/OpenAPI documentation
+* Add input validation and error handling
+* Add a simple frontend (React or plain HTML/JS)
+* Deploy to platforms like Render, Railway
+* Add Swagger or Postman API docs
 
 ---
 
 ## 🧑‍💻 Author
 
 **Aditya Prakash**
-Feel free to fork, clone, and build on top of this API server!
+Feel free to fork, contribute, and build on this!
+
+---
+
+```
+
+---
