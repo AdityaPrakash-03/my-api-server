@@ -178,6 +178,4 @@ Feel free to fork, contribute, and build on this!
 
 ---
 
-```
-
 
