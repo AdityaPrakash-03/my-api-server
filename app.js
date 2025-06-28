@@ -26,3 +26,21 @@ app.delete('/api/users/:id', async (req, res) => {
 });
 
 module.exports = app;
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'User API',
+            version: '1.0.0',
+    },
+    },
+  apis: ['./app.js'], // wherever your routes are defined
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+

@@ -1,0 +1,40 @@
+name: Keploy API Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  keploy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.9.0
+        with:
+          mongodb-version: '6.0'
+
+      - name: Start server
+        run: nohup npm start &
+
+      - name: Install Keploy CLI
+        run: |
+          curl --silent -L https://keploy.io/ent/install.sh | bash
+
+      - name: Run Keploy Test Suite
+        env:
+          KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
+        run: |
+          keploy test-suite export KEPLOY_API_KEY=IOx2hYEsK738SXbifw== && keploy test-suite --app=1a8aa798-6c0e-4f30-bb7f-7b1bf163a03b --base-path http://localhost:3000 --cloud http://localhost:3000 --cloud
