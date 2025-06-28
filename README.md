@@ -175,9 +175,7 @@ my-api-server/
 
 **Aditya Prakash**
 Feel free to fork, contribute, and build on this!
-
+If you liked it, do give a star to this repo!
 ---
 
-```
 
----
