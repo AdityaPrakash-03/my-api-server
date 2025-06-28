@@ -141,14 +141,20 @@ This will generate a coverage report and display it in the terminal.
 
 ---
 
+Here's your updated **README.md** with the **AI-Powered API Testing with Keploy** section cleanly added after **📂 Folder Structure** and before **📌 Future Improvements**:
+
+---
+
+```md
 ## 📂 Folder Structure
 
 ```
+
 my-api-server/
 │
 ├── models/
 │   └── User.js
-├── __tests__/
+├── **tests**/
 │   ├── user.unit.test.js
 │   ├── user.integration.test.js
 │   └── user.api.test.js
@@ -158,7 +164,60 @@ my-api-server/
 ├── package.json
 ├── README.md
 └── coverage/
-```
+
+````
+
+---
+
+## 🤖 AI-Powered API Testing with Keploy
+
+### ✅ OpenAPI Schema  
+OpenAPI 3.0 spec created 
+
+### ✅ AI Test Generation  
+Used `keploy record` to capture requests/responses as test cases from curl and ThunderClient runs.
+
+### ✅ Run Tests with Keploy  
+```bash
+keploy record -c "npm start"
+keploy test
+````
+
+### ✅ Screenshots (Report)
+
+🔗 **Dashboard**: Keploy Dashboard Link
+📸 **Image**: ![Test Coverage Screenshot](assests/ss2.png)
+
+### 🔄 CI/CD Pipeline with GitHub Actions
+
+* ✅ Lint, Build, and Unit Test
+* ✅ Keploy Test Integration
+* ✅ Auto-deploy frontend via GitHub Pages
+  📁 **CI File**: `.github/workflows/keploy-test.yml`
+  📸 ![Test Coverage Screenshot](assests/ss3.png)
+
+### 🧪 Chrome Extension Testing Experience
+
+Tested the following public APIs using the Keploy Chrome Extension:
+
+* 🔹 `jsonplaceholder.typicode.com`
+* 🔹 `reqres.in`
+
+Captured multiple API calls and verified automated test generation. Keploy smartly extracted curl commands and assertions.
+![Test Coverage Screenshot](assests/ss4.png)
+
+### ✍️ Blog Post (Keploy Experience)
+
+📄 **Read My Blog Post**
+
+Wrote about the experience comparing manual testing with AI-based testing using Keploy, Read it at my dev.to post
+
+Topics covered:
+
+* Challenges with writing tests manually
+* Experience with `keploy record` and `test`
+* Instant test generation from API logs
+* Excitement about using AI for regression testing
 
 ---
 
@@ -169,7 +228,6 @@ my-api-server/
 * Deploy to platforms like Render, Railway
 * Add Swagger or Postman API docs
 
----
 
 ## 🧑‍💻 Author
 
